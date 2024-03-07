@@ -1,0 +1,40 @@
+.movieElement {
+  display: flex;
+  margin: 2em 0;
+  font-size: .65rem;
+}
+
+.movieElement:hover {
+    background-color: #231933;
+    cursor: pointer;
+}
+
+.moviePoster {
+  width: 108px;
+  height: 162px;
+  box-shadow: 0 1px 5px rgba(0,0,0,.25),0 1px 10px rgba(0,0,0,.35);
+}
+
+.noPoster {
+  height: 162px;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: .75em;
+  justify-content: center;
+}
+
+hr {
+    color: transparent;
+}
+
+.noPoster {
+    padding: 1.5em;
+}
+
+.noPosterMsg {
+    margin-top: 1em;
+    font-weight: 700;
+}

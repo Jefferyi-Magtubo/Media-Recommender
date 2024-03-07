@@ -48,30 +48,3 @@ body {
   margin: 1em 0;
 }
 
-.movieElement {
-  display: flex;
-  margin: 1em 0;
-  font-size: .65rem;
-}
-
-.moviePoster {
-  width: 108px;
-  height: 162px;
-  box-shadow: 0 1px 5px rgba(0,0,0,.25),0 1px 10px rgba(0,0,0,.35);
-}
-
-.noPoster {
-  background-color: white;
-  width: 55%;
-  height: 162px;
-  font-size: 1rem;
-  font-weight: bold;
-  box-shadow: 0 1px 5px rgba(0,0,0,.25),0 1px 10px rgba(0,0,0,.35);
-}
-
-.movieInfo {
-  display: flex;
-  flex-direction: column;
-  margin-left: .5em;
-  justify-content: center;
-}

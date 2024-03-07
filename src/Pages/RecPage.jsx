@@ -1,6 +1,7 @@
 import React from 'react'
 import { options } from '../APIoptions'
 import { nanoid } from 'nanoid'
+import MovieElement from '/src/components/MovieElement/MovieElement.jsx'
 
 export default function RecPage() {
     const [moviePicked, setMovie] = React.useState("")
@@ -22,15 +23,16 @@ export default function RecPage() {
 
         movieList.slice(0,5).map((movie) => {
             return (
-                <div className='movieElement' key={movie.id}>
-                    {movie.poster_path ? 
-                        <img className="moviePoster" alt={`This is the movie poster for ${movie.original_title}.`} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}/> : 
-                        <div className='noPoster'>This blank rectangle means no poster could be found</div>}
-                    <div className='movieInfo'>
-                        <h1>{movie.title} {movie.release_date ? `(${movie.release_date.slice(0,4)})` : null}</h1>
-                        <p>{movie.overview ? movie.overview : "Details about the plot could not be found."}</p>
-                    </div>
-                </div>
+                // <div className='movieElement' key={movie.id}>
+                //     {movie.poster_path ? 
+                //         <img className="moviePoster" alt={`This is the movie poster for ${movie.title}.`} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}/> : 
+                //         <div className='noPoster'>This blank rectangle means no poster could be found</div>}
+                //     <div className='movieInfo'>
+                //         <h1>{movie.title} {movie.release_date ? `(${movie.release_date.slice(0,4)})` : null}</h1>
+                //         <p>{movie.overview ? movie.overview : "Details about the plot could not be found."}</p>
+                //     </div>
+                // </div>
+                <MovieElement key={movie.id} id={movie.id} title={movie.title} rDate={movie.release_date} summary={movie.overview} poster={movie.poster_path}/>
             )
         })
 
