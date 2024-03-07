@@ -2,8 +2,9 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Header from '/src/components/Header/Header.jsx'
-import RecPage from './Pages/RecPage'
+import SearchPage from './Pages/SearchPage'
 import Watchlist from './Pages/Watchlist'
+import Parameters from './Pages/Parameters'
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Header />}>
-          <Route index element={<RecPage />} />
+          <Route index element={<SearchPage />} />
+          <Route path="parameters" element={<Parameters />} />
           <Route path="saved" element={<Watchlist />} />
         </Route>
       </Routes>

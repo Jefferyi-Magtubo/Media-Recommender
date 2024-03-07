@@ -11,7 +11,3 @@ export const genres = fetch('https://api.themoviedb.org/3/genre/movie/list?langu
   .then(response => console.log(response))
   .catch(err => console.error(err));
 
-  fetch('https://api.themoviedb.org/3/credit/13223', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
