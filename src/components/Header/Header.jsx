@@ -4,11 +4,11 @@ import './Header.css'
 
 export default function Header() {
 
-    return(
+    return (
         <>
             <header>
-                <h1><NavLink></NavLink>Media Recommender</h1>
-                <h2>Saved Media</h2>
+                <h1><NavLink></NavLink>Movie Recommender</h1>
+                <h2>Watchlist</h2>
             </header>
             <Outlet />
         </>

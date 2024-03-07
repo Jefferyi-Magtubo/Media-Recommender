@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Header from '/src/components/Header/Header.jsx'
 import RecPage from './Pages/RecPage'
-import Saved from './Pages/Saved'
+import Watchlist from './Pages/Watchlist'
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<RecPage />} />
-          <Route path="saved" element={<Saved />} />
+          <Route path="saved" element={<Watchlist />} />
         </Route>
       </Routes>
     </BrowserRouter>

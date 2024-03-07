@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function Saved() {
+export default function Watchlist() {
     return <p>sdsds</p>
 }

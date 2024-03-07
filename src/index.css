@@ -5,3 +5,23 @@
   
 }
 
+body {
+  background: #2C343F;
+  
+}
+
+.container {
+  width: 80%;
+  margin: 1em auto 0 auto;
+  
+}
+
+.instructions {
+  color: #87B3CC;
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+
+.movieInput {
+  width: 100%
+}
