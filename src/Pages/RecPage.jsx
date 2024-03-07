@@ -22,12 +22,13 @@ export default function RecPage() {
 
         movieList.slice(0,5).map((movie) => {
             return (
-                <div className='movieElement' key={nanoid()}>
+                <div className='movieElement' key={movie.id}>
                     {movie.poster_path ? 
                         <img className="moviePoster" alt={`This is the movie poster for ${movie.original_title}.`} src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}/> : 
-                        <div className='noPoster'>This blank square means no poster could be found</div>}
-                    <div>
-                        <h1>{movie.original_title} {movie.release_date ? `(${movie.release_date.slice(0,4)})` : null}</h1>
+                        <div className='noPoster'>This blank rectangle means no poster could be found</div>}
+                    <div className='movieInfo'>
+                        <h1>{movie.title} {movie.release_date ? `(${movie.release_date.slice(0,4)})` : null}</h1>
+                        <p>{movie.overview ? movie.overview : "Details about the plot could not be found."}</p>
                     </div>
                 </div>
             )
