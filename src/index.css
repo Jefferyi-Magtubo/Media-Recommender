@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  width: 80%;
+  width: 90%;
   margin: 1em auto 0 auto;
   
 }
@@ -22,6 +22,45 @@ body {
   margin-bottom: 1em;
 }
 
+.searchBtn {
+  border: none;
+  border-radius: .5em;
+  background-color: #556677;
+  padding: .5em;
+  font-weight: bold;
+  width: 100%;
+}
+
+.searchBtn:hover {
+  background-color: #8eaab2;
+  color: #B4D2E1;
+}
+
 .movieInput {
-  width: 100%
+  border-radius: .5em;
+  border: none;
+  width: 100%;
+  padding: .5em;
+  margin-bottom: .5em;
+}
+
+.movieElements {
+  margin: 1em 0;
+}
+
+.movieElement {
+  display: flex;
+  margin: 1em 0;
+  font-size: .5rem;
+}
+
+.moviePoster {
+  width: 108px;
+  height: 162px;
+}
+
+.noPoster {
+  background-color: white;
+  width: 108px;
+  height: 162px;
 }
