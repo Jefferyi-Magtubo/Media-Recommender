@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 export default function Parameters() {
 
     const location = useLocation()
-    console.log(location.state.id)
+    console.log(location.state)
 
     return (
         <div className="container">
@@ -39,6 +39,13 @@ export default function Parameters() {
 
             <input type="checkbox" id="writer"/>
             <label htmlFor="director">Set Decoration</label>
+
+            <input type="checkbox" id="writer"/>
+            <label htmlFor="director">Score</label>
+
+            <input type="checkbox" id="writer"/>
+            <label htmlFor="director">Songs</label>
+
         </div>
     )
 }
