@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
-import Header from '/src/components/Header/Header.jsx'
+import Header from './components/Header/Header'
 import SearchPage from './Pages/SearchPage'
 import Watchlist from './Pages/Watchlist'
 import Parameters from './Pages/Parameters'
