@@ -1,14 +1,14 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { options } from '/src/APIoptions.jsx'
+import { options } from '../APIoptions'
 
 export default function Parameters() {
 
     const location = useLocation()
     console.log(location.state)
 
-    const actors = []
-    const crew = []
+    const actors : string[] = []
+    const crew : {}[] = []
 
     React.useEffect(() => {
         async function getMovie() {
@@ -21,13 +21,13 @@ export default function Parameters() {
             console.log(credits)
             console.log(details)
 
-            credits.cast.slice(0,5).forEach((person) => {
+            credits.cast.slice(0,5).forEach((person : {name: string}) => {
                 actors.push(person.name)
                 console.log(actors)
             })
 
-            credits.crew.slice(0,5).forEach((person) => {
-                crew.push({job: person.job})
+            credits.crew.slice(0,5).forEach((person : {job: string}) => {
+                crew.push({"job": person.job})
                 console.log(crew)
             })
         }
@@ -36,7 +36,8 @@ export default function Parameters() {
     }, [])
 
     function getInfo() {
-        console.log(document.getElementById('director').value)
+        const directorEl = document.getElementById('director') as HTMLInputElement
+        console.log(directorEl.value)
     }
 
     actors.forEach((person) => {

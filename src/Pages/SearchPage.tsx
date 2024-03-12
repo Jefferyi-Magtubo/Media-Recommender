@@ -1,14 +1,17 @@
 import React from 'react'
 import { options } from '../APIoptions'
-import MovieElement from '/src/components/MovieElement/MovieElement.jsx'
+import MovieElement from '../components/MovieElement/MovieElement'
 
 export default function SearchPage() {
 
     // Generating list of Movies based on the search
-    const [movieList, setMovieList] = React.useState(null)
+    const [movieList, setMovieList] = React.useState([])
 
     async function handleSearch () {
-        const searchValue = document.getElementById('movieInput').value.split(" ").join("%20")
+
+        const userInput = document.getElementById('movieInput') as HTMLInputElement
+
+        const searchValue = userInput.value.split(" ").join("%20")
         
         const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`, options)
         const data = await res.json()
@@ -19,7 +22,7 @@ export default function SearchPage() {
 
     const searchElements = movieList ? 
 
-        movieList.slice(0,5).map((movie) => {
+        movieList.slice(0,5).map((movie : {id: number, title: string, release_date: string, overview: string, poster_path: string}) => {
             return (
                 <MovieElement key={movie.id} id={movie.id} title={movie.title} rDate={movie.release_date} summary={movie.overview} poster={movie.poster_path}/>
             )

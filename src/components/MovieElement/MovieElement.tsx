@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom"
 import './MovieElement.css'
 
-export default function MovieElement({id, title, rDate, poster,summary, select}) {
+export default function MovieElement({id, title, rDate, poster, summary} : {id: number, title: string, rDate: string, poster: string, summary: string}) {
 
     return (
         <NavLink to="/parameters" state={id}>
