@@ -5,7 +5,7 @@ import './MovieElement.css'
 export default function MovieElement({id, title, rDate, poster, summary} : {id: number, title: string, rDate: string, poster: string, summary: string}) {
 
     return (
-        <NavLink to="/parameters" state={id}>
+        <NavLink to="/parameters" state={{id: id, title: title}}>
             <div className={`movieElement ${poster ? "" : "noPoster"}`} key={id}>
                 {poster ? 
                 <img className="moviePoster" alt={`This is the movie poster for ${title}.`} src={`https://image.tmdb.org/t/p/w300/${poster}`}/> : 

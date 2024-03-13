@@ -7,27 +7,28 @@ export default function Parameters() {
     const location = useLocation()
     console.log(location.state)
 
-    const actors : string[] = []
-    const crew : {}[] = []
+    const [actors, setActors] = React.useState<{}[]>([])
+    const [crew, setCrew] = React.useState<{}[]>([])
 
     React.useEffect(() => {
         async function getMovie() {
-            const res1 = await fetch('https://api.themoviedb.org/3/movie/152601/credits?language=en-US', options)
+            const res1 = await fetch(`https://api.themoviedb.org/3/movie/${location.state.id}/credits?language=en-US`, options)
             const credits = await res1.json()
 
-            const res2 = await fetch('https://api.themoviedb.org/3/movie/152601?language=en-US', options)
+            const res2 = await fetch(`https://api.themoviedb.org/3/movie/${location.state.id}?language=en-US`, options)
             const details = await res2.json()
         
             console.log(credits)
             console.log(details)
 
-            credits.cast.slice(0,5).forEach((person : {name: string}) => {
-                actors.push(person.name)
+            credits.cast.slice(0,5).forEach((person : {name: string, id: number}) => {
+                
+                setActors(oldActors => [...oldActors, {"name": person.name, "id": person.id}])
                 console.log(actors)
             })
 
-            credits.crew.slice(0,5).forEach((person : {job: string}) => {
-                crew.push({"job": person.job})
+            credits.crew.slice(0,5).forEach((person : {job: string, id: number, name: string}) => {
+                setCrew(oldCrew => [{...oldCrew }, {"name": person.name, "id": person.id, "job": person.job}])
                 console.log(crew)
             })
         }
@@ -40,13 +41,11 @@ export default function Parameters() {
         console.log(directorEl.value)
     }
 
-    actors.forEach((person) => {
-        console.log(person)
-    })
+
 
     return (
         <div className="container">
-            <h1>What did you like about it?</h1>
+            <h1>What did you like about {location.state.title}?</h1>
 
             <input type="checkbox" id="genre"/>
             <label htmlFor="director">Genre</label>
