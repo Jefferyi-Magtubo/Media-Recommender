@@ -5,5 +5,11 @@
 
 }
 
+.parameters {
+  display: flex;
+  flex-direction: column;
+}
 
-
+h1.question {
+  text-align: center;
+}
