@@ -8,7 +8,6 @@ export default function Header() {
         <>
             <header>
                 <h1>Movie Recommender</h1>
-                <h2>Watchlist</h2>
             </header>
             <Outlet />
         </>
