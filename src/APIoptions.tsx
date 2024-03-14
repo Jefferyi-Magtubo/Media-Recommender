@@ -11,3 +11,5 @@ export const genres = fetch('https://api.themoviedb.org/3/genre/movie/list?langu
   .then(response => console.log(response))
   .catch(err => console.error(err));
 
+const res2 = await fetch('https://api.themoviedb.org/3/configuration/languages', options)
+export const languages = await res2.json()

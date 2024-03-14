@@ -1,10 +1,5 @@
 label {
-    margin-bottom: .5em;
+    margin-bottom: .75em;
     position: relative;
 }
 
-input {
-    border: 1px solid black;
-    position: relative;
-    left: -.25em;
-}
