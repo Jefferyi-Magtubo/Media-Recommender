@@ -29,8 +29,6 @@ export default function Parameters() {
             const res2 = await fetch(`https://api.themoviedb.org/3/movie/${location.state.id}?language=en-US`, options)
             const details = await res2.json()
 
-            // console.log(details)
-
             setDetails(details)
 
             setLanguage(languages.filter((language : {english_name: string, iso_639_1: string}) => {
@@ -53,7 +51,7 @@ export default function Parameters() {
         getMovie()
     }, [])
 
-    //Info to be sent to Recommender Page
+    //Info to be sent to Recommender Page and the functions to change their values
     const [genresInfo, setGenresInfo] = React.useState<number[]>([])
     const [year, setYear] = React.useState<number>()
     const [runtime, setRuntimeInfo] = React.useState<number>(0)
@@ -103,7 +101,7 @@ export default function Parameters() {
                 return updatedCastAndCrew;
             });
         } else {
-            setCastAndCrewInfo(oldActorsAndCrew => [...oldActorsAndCrew, {"id": id, "job": job}]);
+            setCastAndCrewInfo(oldActorsAndCrew => [...oldActorsAndCrew, {id: id, job: job}]);
         }
     }
 
@@ -147,7 +145,7 @@ export default function Parameters() {
                 <NavLink to="/recommendation" state={{currentMovie: location.state.id, genres: genresInfo, year: year, runtime: runtime, language: languageInfo, castAndCrew: castAndCrew}} className={"button"}>
                     Recommend me a movie!
                 </NavLink> :
-                ""
+                null
             }
         </div>
     )
