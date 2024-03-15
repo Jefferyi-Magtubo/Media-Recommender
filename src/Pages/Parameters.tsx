@@ -4,6 +4,7 @@ import { options } from '../APIoptions'
 import PeopleInput from "../components/PeopleInput/PeopleInput";
 import GenreInput from "../components/GenreInput/GenreInput";
 import { languages } from "../APIoptions";
+import { NavLink } from "react-router-dom"
 
 export default function Parameters() {
 
@@ -55,20 +56,60 @@ export default function Parameters() {
     //Info to be sent to Recommender Page
     const [genresInfo, setGenresInfo] = React.useState<number[]>([])
     const [year, setYear] = React.useState<number>()
-    const [runtime, setRuntime] = React.useState<number>()
+    const [runtime, setRuntimeInfo] = React.useState<number>(0)
     const [languageInfo, setLanguageInfo] = React.useState<string>()
-    const [behindTheCamera, setBehindTheCamera] = React.useState<number[]>([])
-    const [actorsInfo, setActorsInfo] = React.useState<number[]>([])
+    const [castAndCrew, setCastAndCrewInfo] = React.useState<{id: number, job: string}[]>([])
 
     function changeGenre(id: number) {
-        setGenresInfo(oldgenres => [...oldgenres, id])
-        console.log(genresInfo)
+        if(!genresInfo.includes(id)) {
+            setGenresInfo(oldgenres => [...oldgenres, id])
+        } else {
+            setGenresInfo(oldgenres => oldgenres.filter(genre => genre !== id))
+        }
     }
 
-    function getInfo() {
-        const directorEl = document.getElementById('director') as HTMLInputElement
+    function changeYear(movieYear: number) {
+        if(year) {
+            setYear(0)
+        } else {
+            setYear(movieYear)
+        }
+    }   
 
+    function changeRuntime(minutes: number) {
+        if(runtime) {
+            setRuntimeInfo(0)
+        } else {
+            setRuntimeInfo(minutes)
+        }
     }
+
+    function changeLanguage(language: string) {
+        if(languageInfo) {
+            setLanguageInfo("")
+        } else {
+            setLanguageInfo(language)
+        }
+    }
+
+    function changeCastAndCrew(id: number, job: string) {
+
+        const personIndex = castAndCrew.findIndex(person => person.id === id);
+
+        if (personIndex !== -1) {
+            setCastAndCrewInfo(oldActorsAndCrew => {
+                const updatedCastAndCrew = [...oldActorsAndCrew];
+                updatedCastAndCrew.splice(personIndex, 1);
+                return updatedCastAndCrew;
+            });
+        } else {
+            setCastAndCrewInfo(oldActorsAndCrew => [...oldActorsAndCrew, {"id": id, "job": job}]);
+        }
+    }
+
+    React.useEffect(() => {
+        console.log(genresInfo, year, runtime, languageInfo, castAndCrew);
+    }, [castAndCrew]);
 
     return (
         <div className="container parameters">
@@ -78,31 +119,36 @@ export default function Parameters() {
 
             <GenreInput genres={movieDetails.genres} onClick={changeGenre}/>
 
-            <label htmlFor="year" >
-                <input type="checkbox" id="year" value="year"/>Year: {movieDetails.release_date.slice(0,4)}
+            <label htmlFor="year" onClick={() => changeYear(Number(movieDetails.release_date.slice(0,4)))}>
+                <input type="checkbox" id="year" value="year" onClick={() => changeYear(Number(movieDetails.release_date.slice(0,4)))}/>Year: {movieDetails.release_date.slice(0,4)}
             </label>
 
-            <label htmlFor="length" >
+            <label htmlFor="length" onClick={() => changeRuntime(movieDetails.runtime)}>
                 <input type="checkbox" id="length" value={movieDetails.runtime}/>Runtime: {movieDetails.runtime} minutes
             </label>
 
-            <label htmlFor="language" >
+            <label htmlFor="language" onClick={() => changeLanguage(movieDetails.original_language)}>
                 <input type="checkbox" id="language" value={movieDetails.original_language}/>Original Language: {language[0].english_name}
             </label>
 
             <h2 className="parameterSection">Directors/Writers</h2>
 
-            <PeopleInput people={directorWriter} other={false}/>
+            <PeopleInput people={directorWriter} other={false} onClick={changeCastAndCrew}/>
 
             <h2 className="parameterSection">Actors</h2>
 
-            <PeopleInput people={actors} other={false}/>
+            <PeopleInput people={actors} other={false} onClick={changeCastAndCrew}/>
 
             <h2 className="parameterSection">Other Crew</h2>
 
-            <PeopleInput people={otherCrew} other={true}/>
+            <PeopleInput people={otherCrew} other={true} onClick={changeCastAndCrew}/>
 
-            <button onClick={() => getInfo()}>Recommend me a movie!</button>
+            {genresInfo.length !== 0 || year || runtime !== 0 || languageInfo || castAndCrew.length !== 0 ?
+                <NavLink to="/recommendation" state={{currentMovie: location.state.id, genres: genresInfo, year: year, runtime: runtime, language: languageInfo, castAndCrew: castAndCrew}} className={"button"}>
+                    Recommend me a movie!
+                </NavLink> :
+                ""
+            }
         </div>
     )
 }

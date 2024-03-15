@@ -4,6 +4,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import SearchPage from './Pages/SearchPage'
 import Parameters from './Pages/Parameters'
+import Recommendation from './Pages/Recommendation'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Header />}>
           <Route index element={<SearchPage />} />
           <Route path="parameters" element={<Parameters />} />
+          <Route path="recommendation" element={<Recommendation />} />
         </Route>
       </Routes>
     </BrowserRouter>

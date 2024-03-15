@@ -7,7 +7,7 @@ export default function GenreInput({genres, onClick} : {genres : {id: number, na
         return (
             <>
                 <label htmlFor={genre.id.toString()} key={genre.id}>
-                    <input type="checkbox" id={genre.id.toString()}  value={genre.id.toString()} onClick={() => onClick(genre.id)}/>Genre: {genre.name}
+                    <input type="checkbox" id={genre.id.toString()}  value={genre.id.toString() } onClick={() => onClick(genre.id)}/>Genre: {genre.name}
                 </label>
             </>
         )
