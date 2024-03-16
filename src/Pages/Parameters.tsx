@@ -1,5 +1,5 @@
 import React from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { options } from '../APIoptions'
 import PeopleInput from "../components/PeopleInput/PeopleInput"
 import GenreInput from "../components/GenreInput/GenreInput"
@@ -10,10 +10,6 @@ export default function Parameters() {
 
     // Getting information to display the parameters
     const location = useLocation()
-
-    if (!location.state) {
-        window.location.href = "/"
-    }
 
     const [actors, setActors] = React.useState<{job: string, id: number, name: string}[]>([])
     const [directorWriter, setDirectorWriter] = React.useState<{job: string, id: number, name: string}[]>([])
