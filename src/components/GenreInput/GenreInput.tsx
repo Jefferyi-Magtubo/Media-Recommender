@@ -6,8 +6,9 @@ export default function GenreInput({genres, onClick} : {genres : {id: number, na
     const genreElements = genres.map((genre : {id: number, name: string}) => {
         return (
             <div key={genre.id.toString()}>
-                <label htmlFor={genre.id.toString()} key={genre.id}>
-                    <input type="checkbox" id={genre.id.toString()}  value={genre.id.toString() } onClick={() => onClick(genre.id)}/>Genre: {genre.name}
+                <input type="checkbox" id={genre.id.toString()}  value={genre.id.toString() } onClick={() => onClick(genre.id)}/>
+                <label htmlFor={genre.id.toString()}>
+                    Genre: {genre.name}
                 </label>
             </div>
         )

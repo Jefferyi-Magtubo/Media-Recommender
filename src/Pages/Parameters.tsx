@@ -102,8 +102,10 @@ export default function Parameters() {
                 return updatedCastAndCrew; // Returning the modified array
 
             });
-        } else {
+        } else if (personIndex === -1) {
             setCastAndCrewInfo(oldActorsAndCrew => [...oldActorsAndCrew, {id: id, job: job}]);
+        } else {
+            return
         }
     }
 
