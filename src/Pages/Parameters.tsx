@@ -114,7 +114,6 @@ export default function Parameters() {
     }, [castAndCrew]);
 
     return (
-        location.state ?
         <div className="container parameters">
             <h1 className="question">What did you like about {location.state.title}?</h1>
 
@@ -152,7 +151,6 @@ export default function Parameters() {
                 </NavLink> :
                 null
             }
-        </div> :
-        <NavLink to="/">Start your </NavLink>
+        </div>
     )
 }
