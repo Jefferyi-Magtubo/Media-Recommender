@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import { options } from '../APIoptions'
 import PeopleInput from "../components/PeopleInput/PeopleInput"
 import GenreInput from "../components/GenreInput/GenreInput"
-import { languages } from "../APIoptions"
+import { fetchLanguages } from "../APIoptions"
 import { NavLink } from "react-router-dom"
 
 export default function Parameters() {
@@ -31,7 +31,8 @@ export default function Parameters() {
 
             setDetails(details)
 
-            setLanguage(languages.filter((language : {english_name: string, iso_639_1: string}) => {
+            const languageData = await fetchLanguages()
+            setLanguage(languageData.filter((language : {english_name: string, iso_639_1: string}) => {
                 return language.iso_639_1 === details.original_language
             }))
 

@@ -1,4 +1,3 @@
-import React from "react";
 import './PeopleInput.css'
 
 export default function PeopleInput({people, other, onClick} : {people :{job: string, id: number, name: string}[], other: any, onClick: Function} ) {
