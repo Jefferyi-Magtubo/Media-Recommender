@@ -1,9 +1,9 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React from "react"
+import { useLocation } from "react-router-dom"
 import { options } from '../APIoptions'
-import PeopleInput from "../components/PeopleInput/PeopleInput";
-import GenreInput from "../components/GenreInput/GenreInput";
-import { languages } from "../APIoptions";
+import PeopleInput from "../components/PeopleInput/PeopleInput"
+import GenreInput from "../components/GenreInput/GenreInput"
+import { languages } from "../APIoptions"
 import { NavLink } from "react-router-dom"
 
 export default function Parameters() {
@@ -92,13 +92,14 @@ export default function Parameters() {
 
     function changeCastAndCrew(id: number, job: string) {
 
-        const personIndex = castAndCrew.findIndex(person => person.id === id);
+        const personIndex = castAndCrew.findIndex(person => person.id === id && person.job === job);
 
         if (personIndex !== -1) {
             setCastAndCrewInfo(oldActorsAndCrew => {
                 const updatedCastAndCrew = [...oldActorsAndCrew];
-                updatedCastAndCrew.splice(personIndex, 1);
-                return updatedCastAndCrew;
+                updatedCastAndCrew.splice(personIndex, 1); // Removing the element
+                return updatedCastAndCrew; // Returning the modified array
+
             });
         } else {
             setCastAndCrewInfo(oldActorsAndCrew => [...oldActorsAndCrew, {id: id, job: job}]);
@@ -106,7 +107,7 @@ export default function Parameters() {
     }
 
     React.useEffect(() => {
-        console.log(castAndCrew);
+        console.log("checking",castAndCrew);
     }, [castAndCrew]);
 
     return (

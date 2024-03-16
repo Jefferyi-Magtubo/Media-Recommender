@@ -5,9 +5,21 @@
 
 }
 
+.container {
+  width: 80%;
+  max-width: 900px;
+}
+
 .parameters {
   display: flex;
   flex-direction: column;
+  max-width: 1000px;
+}
+
+.parameters > h2 {
+  font-size: 1.2rem;
+  margin: .5em 0;
+  text-decoration: underline;
 }
 
 h1.question {
@@ -15,9 +27,34 @@ h1.question {
 }
 
 .button {
-  background-color: green;
+  background-color: #00C030;
   text-align: center;
   padding: .5em .35em;
-  margin-top: .5em 0;
+  margin: .5em 0;
   color: white;
+  border: none;
+  border-radius: .5em;
+}
+
+.button:hover {
+  background-color: #00AC1C;
+}
+
+.recommendationElement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 1em auto;
+  gap: .25em;
+  text-align: center;
+}
+
+
+
+.recommendationElement > img {
+  width: 208px;
+  height: 362px;
+  display: block;
+  margin-bottom: .25em;
 }
