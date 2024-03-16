@@ -11,18 +11,12 @@ export default function Recommendation() {
 
     //Getting all the movies that the crew have worked together on
     const [crewMovies, setCrewMovies] = React.useState<number[] >([])
-
-    React.useEffect(() => {
-        console.log(crewMovies)
-    },[crewMovies])
-
     
     React.useEffect(() => {
         async function fetchCrewMovies() {
         
         const crewQuery = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job != "Actor").map((person: {id: number, job: string}) => {return person})
 
-        console.log(crewQuery)
         const currentCrewMovies : number[] = []
 
         crewQuery.forEach(async (person : {id: number, job: string}) => {
@@ -31,9 +25,7 @@ export default function Recommendation() {
             
             let moviesToCheck : number[] = []
             if(crewQuery.indexOf(person) === 0 && crewQuery.length === 1) {
-                console.log('we ran')
                 crewResults.crew.forEach((credit: {job: string, id: number}) => {
-                    console.log("here", credit.job === person.job)
                     if(credit.job === person.job) {
                         setCrewMovies(oldCredits => [...oldCredits, credit.id])
                     }
@@ -80,18 +72,14 @@ export default function Recommendation() {
         fetchFilteredMovies();
     }, []);
 
-    console.log(crewMovies)
-    console.log(searchResults)
-
     const finalFilteredList = crewMovies.length > 0 && searchResults.length < 400? searchResults.filter((movie) => crewMovies.includes(movie)).filter(movie => movie !== location.state.currentMovie): 
     crewMovies.length > 0 && searchResults.length === 400? crewMovies.filter(movie => movie !== location.state.currentMovie) :
     crewMovies.length === 0 && searchResults.length > 0 ? searchResults:
     ""
 
-    console.log(finalFilteredList)                        
     const randomMovie = finalFilteredList[Math.floor(Math.random() * finalFilteredList.length)]
 
-    const [recdMovie, setRecdMovie] = React.useState<{title: string, poster_path: string}>({title: "", poster_path: ""})
+    const [recdMovie, setRecdMovie] = React.useState<{title: string, overview: string,poster_path: string, genres: {id:number, name: string}[]}>({title: "", overview: "",poster_path: "", genres: [{id: 0, name: ""}]})
 
     React.useEffect(() => {
         async function getRecdMovie() {
@@ -108,9 +96,10 @@ export default function Recommendation() {
             <div className="recommendationElement">
                 <h2>We Suggest You Watch:</h2>
                 <h1>{recdMovie.title}</h1>
-                <img className="moviePoster" alt={`This is the movie poster for ${recdMovie.title}.`} src={`https://image.tmdb.org/t/p/w300/${recdMovie.poster_path}`}/>
+                <img className="moviePoster" alt={recdMovie.poster_path ? `This is the movie poster for ${recdMovie.title}.}` : "No poster can be found."} src={`https://image.tmdb.org/t/p/w300/${recdMovie.poster_path}`}/>
+                <p className="recdGenres">{recdMovie.genres.map((genre : {id: number, name: string}) => {return genre.name}).join(", ")}</p>
+                <p>{recdMovie.overview ? recdMovie.overview : ""}</p>
                 <NavLink className={"button"} to={"/"}>Back to Home</NavLink>
-                <h2>To minimzie the chances of bugs, go back home and refresh the page if you want another recommendation.</h2>
             </div> :
             <div className="recommendationElement">
                 <h1>Finding the perfect movie... give us a moment...</h1>

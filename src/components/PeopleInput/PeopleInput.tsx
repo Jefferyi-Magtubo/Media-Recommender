@@ -1,7 +1,6 @@
 import './PeopleInput.css'
 
 export default function PeopleInput({people, other, onClick} : {people :{job: string, id: number, name: string}[], other: any, onClick: Function} ) {
-    // console.log(people)
 
     const inputElements = people.map((person : {job: string, id: number, name: string}) => {
 
@@ -22,8 +21,6 @@ export default function PeopleInput({people, other, onClick} : {people :{job: st
         }
 
     })
-
-    // console.log(inputElements)
 
     return (
         <>

@@ -1,7 +1,6 @@
 import './GenreInput.css'
 
 export default function GenreInput({genres, onClick} : {genres : {id: number, name: string}[], onClick: Function}) {
-    // console.log(genres)
 
     const genreElements = genres.map((genre : {id: number, name: string}) => {
         return (

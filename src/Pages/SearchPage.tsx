@@ -17,7 +17,6 @@ export default function SearchPage() {
         const data = await res.json()
 
         setMovieList(data.results)
-        console.log(data)
     }
 
     const searchElements = movieList ? 
