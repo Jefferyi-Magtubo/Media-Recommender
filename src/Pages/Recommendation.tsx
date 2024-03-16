@@ -7,6 +7,10 @@ import { NavLink } from "react-router-dom"
 export default function Recommendation() {
     const location = useLocation()
 
+    if (!location.state) {
+        window.location.href = "/"
+    }
+
     const [pickedMovie, setPicked] = React.useState<boolean>(false)
 
     //Getting all the movies that the crew have worked together on

@@ -11,6 +11,10 @@ export default function Parameters() {
     // Getting information to display the parameters
     const location = useLocation()
 
+    if (!location.state) {
+        window.location.href = "/"
+    }
+
     const [actors, setActors] = React.useState<{job: string, id: number, name: string}[]>([])
     const [directorWriter, setDirectorWriter] = React.useState<{job: string, id: number, name: string}[]>([])
     const [otherCrew, setOtherCrew] = React.useState<{job: string, id: number, name: string}[]>([])
@@ -114,6 +118,7 @@ export default function Parameters() {
     }, [castAndCrew]);
 
     return (
+        location.state ?
         <div className="container parameters">
             <h1 className="question">What did you like about {location.state.title}?</h1>
 
@@ -151,6 +156,7 @@ export default function Parameters() {
                 </NavLink> :
                 null
             }
-        </div>
+        </div> :
+        <NavLink to="/">Start your </NavLink>
     )
 }
