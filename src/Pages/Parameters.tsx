@@ -106,7 +106,7 @@ export default function Parameters() {
     }
 
     React.useEffect(() => {
-        console.log(genresInfo, year, runtime, languageInfo, castAndCrew);
+        console.log(castAndCrew);
     }, [castAndCrew]);
 
     return (

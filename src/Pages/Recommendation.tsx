@@ -8,52 +8,77 @@ export default function Recommendation() {
 
     console.log(location.state.runtime, location.state.castAndCrew)
 
-    const actorsQuery = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job == "Actor")
-        .map((actor: {id: number, job: string}) => {return actor.id}).join("%2C")
+    const [crewMovies, setCrewMovies] = React.useState<number[] >([])
 
-    const genresQuery = location.state.genres.join("%2C")
 
-    const crewQuery = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job != "Actor").map((person: {id: number, job: string}) => {return person})
-    console.log(crewQuery)
-    const crewMovies: {id: number, job: string}[] = []
-    crewQuery.forEach(async (person : {id: number, job: string}) => {
-        const res = await fetch(`https://api.themoviedb.org/3/person/${person.id}/movie_credits?language=en-US`, options)
-        const crewResults = await res.json()
-        for(let i = 0; i < crewResults.crew.length; i++) {
-            crewResults.crew.forEach((credit: {job: string, id: number}) => {
-                if(crewMovies.length === 0 && i === 0) {
-                    crewMovies.push({id: credit.id, job: credit.job})
-                } else if (crewMovies.length !== 0) {
-                    
-                }
-            })
+
+    //Getting all the movies that the crew have worked together on
+    React.useEffect(() => {
+        async function fetchCrewMovies() {
+        
+
+        const crewQuery = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job != "Actor").map((person: {id: number, job: string}) => {return person})
+
+        crewQuery.forEach(async (person : {id: number, job: string}) => {
+            const res = await fetch(`https://api.themoviedb.org/3/person/${person.id}/movie_credits?language=en-US`, options)
+            const crewResults = await res.json()
+            let moviesToCheck : number[] = []
+            if(crewQuery.indexOf(person) === 0) {
+                crewResults.crew.forEach((credit: {job: string, id: number}) => {
+                    if(credit.job === person.job) {
+                        setCrewMovies(prevMovies => [...prevMovies, credit.id])
+                    }
+                })
+            } else {
+                crewResults.crew.forEach((credit: {id: number, job: string}) => {
+                    if(credit.job === person.job) {
+                        moviesToCheck.push(credit.id)
+                    } 
+                })
+                console.log("checK", moviesToCheck)
+                console.log("before", crewMovies)
+                const newCrewMovies = moviesToCheck.filter(element => crewMovies.includes(element))
+                console.log("newCrew" + newCrewMovies)
+                setCrewMovies(newCrewMovies)
+                console.log("crew2" + crewMovies)
+            }
+        })}
+
+        fetchCrewMovies()
+    }, [])
+    // 1104269
+    const [searchResults, setSearchResults] = React.useState<number[]>([])
+
+    React.useEffect(() => {
+        console.log("current", crewMovies)
+    }, [crewMovies])
+
+    React.useEffect(() => {
+        async function fetchFilteredMovies() {
+            const filteredMovies = []
+            const actorsQuery = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job == "Actor")
+            .map((actor: {id: number, job: string}) => {return actor.id}).join("%2C")
+            const genresQuery = location.state.genres.join("%2C")
+            for (let i = 1; i < 21; i++) {
+                const resData = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${i}${location.state.year ? `&primary_release_year=${location.state.year}` : ""}&sort_by=popularity.desc${actorsQuery ? `&with_cast=${actorsQuery}` : ""}${genresQuery ? `&with_genres=${genresQuery}` : ""}${location.state.language ? `&with_original_language=${location.state.language}` : ""}${location.state.runtime ? `&with_runtime.gte=${location.state.runtime - 8}`  : ""}${location.state.runtime ? `&with_runtime.lte=${location.state.runtime + 8}` : ""}`, options)
+                const data = await resData.json()
+                const pageData = data.results.map((movie : { id: number}) => movie.id)
+                filteredMovies.push(pageData)
+            }
+            const finalList = [].concat(...filteredMovies)
+            // console.log(finalList)
+            setSearchResults(finalList)
         }
 
-    })
+        fetchFilteredMovies();
+    }, []);
 
-    async function getRecommendedMovie() {
-        const filteredMovies = []
-        for(let i = 1; i < 6; i++) {
-            const res1 = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${i}
-                ${location.state.year ? `&primary_release_year=${location.state.year}` : ""}&sort_by=popularity.desc
-                ${actorsQuery ? `&with_cast=${actorsQuery}` : ""}
-                ${genresQuery ? `&with_genres=${genresQuery}` : ""}
-                ${location.state.language ? `&with_original_language=${location.state.language}` : ""}
-                ${location.state.runtime ? `&with_runtime.gte=${location.state.runtime - 8}`  : ""}
-                ${location.state.runtime ? `&with_runtime.lte=${location.state.runtime + 8}` : ""}`, options)
-            const filteredData = await res1.json()
-            filteredMovies.push(filteredData.results.map((movie : {id:number}) => {return movie.id}))
-        }
-
-        const finalFilteredFilms = [].concat(...filteredMovies)
-        console.log(finalFilteredFilms)
-    }
-    
-    getRecommendedMovie()
+    const finalFilteredList = crewMovies.length !== 0 ? searchResults.filter((element: number) => crewMovies.includes(element)) : searchResults.length === 20 ? crewMovies : ""
+    console.log("final: " + finalFilteredList)
 
     return (
         <>
-
+            <h1>Hi</h1>
         </>
     )
 }
