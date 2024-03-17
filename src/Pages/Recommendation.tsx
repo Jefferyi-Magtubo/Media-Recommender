@@ -1,10 +1,14 @@
 import React from "react"
+import { useRef } from 'react'
 import { useLocation } from "react-router-dom"
 import { options } from "../APIoptions"
 import { NavLink } from "react-router-dom"
 
 
 export default function Recommendation() {
+
+    const isInitialRender = useRef(true);
+
     const location = useLocation()
 
     const [pickedMovie, setPicked] = React.useState<boolean>(false)
@@ -75,11 +79,16 @@ export default function Recommendation() {
         fetchFilteredMovies()
     }, []);
 
-    const finalFilteredList = searchResults.length > 0 && crewMovies.length > 0 ? searchResults.filter((movie) => crewMovies.includes(movie)).filter(movie => movie !== location.state.currentMovie):
-    crewMovies.length === 0 ? searchResults.filter(movie => movie !== location.state.currentMovie):
-    ""
+    const [randomMovie, setRandomMovie] = React.useState<number>()
 
-    const randomMovie = finalFilteredList[Math.floor(Math.random() * finalFilteredList.length)]
+    React.useEffect(() => {
+        if(searchResults.length > 0 && isInitialRender.current) {
+            isInitialRender.current = false;
+            const filteredMovies = searchResults.filter((movie) => crewMovies.includes(movie)).filter(movie => movie !== location.state.currentMovie);
+            const randomMovie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+            setRandomMovie(randomMovie);
+        }
+    }, [searchResults])
 
     const [recdMovie, setRecdMovie] = React.useState<{title: string, overview: string,poster_path: string, genres: {id:number, name: string}[]}>({title: "", overview: "",poster_path: "", genres: [{id: 0, name: ""}]})
 
