@@ -16,10 +16,6 @@ export default function Parameters() {
     const [otherCrew, setOtherCrew] = React.useState<{job: string, id: number, name: string}[]>([])
     const [movieDetails, setDetails] = React.useState<{release_date: string, original_language: string, runtime: number,genres: {id: number, name: string}[]}>({release_date: "", original_language: "", runtime: 0, genres: []})
     const [language, setLanguage] = React.useState<{english_name: string, iso_639_1: string}[]>([{english_name: "", iso_639_1: ""}])
-    
-    // React.useEffect(() => {
-    //     console.log(language)
-    // }, [language])
 
     React.useEffect(() => {
         async function getMovie() {
@@ -108,10 +104,6 @@ export default function Parameters() {
             return
         }
     }
-
-    React.useEffect(() => {
-        console.log("checking",castAndCrew);
-    }, [castAndCrew]);
 
     return (
         <div className="container parameters">
