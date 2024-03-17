@@ -2,7 +2,7 @@ export const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMDE5ZTY2MGZmNzgzY2MzOGE4MTQxYzEwZDFhZmY1ZCIsInN1YiI6IjY1ZTYyYTViNDRhNDI0MDE2MzExYjRhNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GazFikd49xSoeBndOmkWfGybikZFWmmLXdHbJcrnITg`
     }
   };
 
