@@ -7,8 +7,6 @@ import { NavLink } from "react-router-dom"
 
 export default function Recommendation() {
 
-    const isInitialRender = useRef(true);
-
     const location = useLocation()
 
     const [pickedMovie, setPicked] = React.useState<boolean>(false)
@@ -81,14 +79,17 @@ export default function Recommendation() {
 
     const [randomMovie, setRandomMovie] = React.useState<number>()
 
+    const isInitialRender = useRef(true);
+
     React.useEffect(() => {
         if(searchResults.length > 0 && isInitialRender.current) {
-            isInitialRender.current = false;
-            const filteredMovies = searchResults.filter((movie) => crewMovies.includes(movie)).filter(movie => movie !== location.state.currentMovie);
-            const randomMovie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
-            setRandomMovie(randomMovie);
+            isInitialRender.current = false
+            const filteredMovies = crewMovies.length > 0 ? searchResults.filter((movie) => crewMovies.includes(movie)).filter(movie => movie !== location.state.currentMovie):
+            searchResults.filter(movie => movie !== location.state.currentMovie)
+            const randomMovie = filteredMovies[Math.floor(Math.random() * filteredMovies.length)]
+            setRandomMovie(randomMovie)
         }
-    }, [searchResults])
+    }, [crewMovies, searchResults])
 
     const [recdMovie, setRecdMovie] = React.useState<{title: string, overview: string,poster_path: string, genres: {id:number, name: string}[]}>({title: "", overview: "",poster_path: "", genres: [{id: 0, name: ""}]})
 
@@ -119,6 +120,7 @@ export default function Recommendation() {
             <div className="recommendationElement">
                 <h1>Finding the perfect movie... give us a moment...</h1>
                 <h2>If you've been stuck on this page for a while, go back to the home page and narrow down your search.</h2>
+                <p>There may be problems when selecting crew. The same role can be labeled differently on different projects (A writer credit on a film can be named "Writer" or Screenplay"). This can cause unexpected results to return.</p>
                 <NavLink className={"button"} to={"/"}>Back to Home</NavLink>
             </div>
             
