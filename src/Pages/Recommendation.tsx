@@ -119,7 +119,7 @@ export default function Recommendation() {
             </div> :
             <div className="recommendationElement">
                 <h1>Finding the perfect movie... give us a moment...</h1>
-                <h2>If you've been stuck on this page for a while, go back to the home page and narrow down your search.</h2>
+                <h2>If you've been stuck on this page for a while, go back to the home page and broaden your search.</h2>
                 <p>There may be problems when selecting crew. The same role can be labeled differently on different projects (A writer credit on a film can be named "Writer" or Screenplay"). This can cause unexpected results to return.</p>
                 <NavLink className={"button"} to={"/"}>Back to Home</NavLink>
             </div>
