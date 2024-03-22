@@ -62,7 +62,7 @@ export default function Recommendation() {
             const crewQuery2 = location.state.castAndCrew.filter((person: {id: number, job: string}) => person.job !== "Actor")
             .map((crewPerson: {id: number, job: string}) => {return crewPerson.id}).join("%2C")
             const genresQuery = location.state.genres.join("%2C")
-            for (let i = 1; i < 21; i++) {
+            for (let i = 1; i < 6; i++) {
                 const resData = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${i}${location.state.year ? `&primary_release_year=${location.state.year}` : ""}&sort_by=popularity.desc${actorsQuery ? `&with_cast=${actorsQuery}` : ""}${genresQuery ? `&with_genres=${genresQuery}` : ""}${location.state.language ? `&with_original_language=${location.state.language}` : ""}${location.state.runtime ? `&with_runtime.gte=${location.state.runtime - 8}`  : ""}${location.state.runtime ? `&with_runtime.lte=${location.state.runtime + 8}` : ""}${crewQuery2 ? `&with_crew=${crewQuery2}` : ""}`, options)
                 const data = await resData.json()
                 const pageData = data.results.map((movie : { id: number}) => movie.id)
