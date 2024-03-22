@@ -7,7 +7,9 @@ export default function SearchPage() {
     // Generating list of Movies based on the search
     const [movieList, setMovieList] = React.useState([])
 
-    async function handleSearch () {
+    async function handleSearch (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+
+        event.preventDefault()
 
         const userInput = document.getElementById('movieInput') as HTMLInputElement
 
@@ -35,8 +37,10 @@ export default function SearchPage() {
         <>
                 <div className='container'>
                     <h1 className='instructions'>Enter a movie of your choice, tell us what you like about it, and we'll give you a film recommendation based on that info!</h1>
-                    <input type='text' className='movieInput' id='movieInput'/>
-                    <button onClick={handleSearch} className='searchBtn'>Search</button>
+                    <form>
+                        <input type='text' className='movieInput' id='movieInput'/>
+                        <button onClick={handleSearch} className='searchBtn'>Search</button>
+                    </form>
                     <div className='movieElements'>
                         {searchElements}
                     </div>
