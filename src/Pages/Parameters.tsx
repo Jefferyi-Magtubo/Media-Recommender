@@ -105,6 +105,8 @@ export default function Parameters() {
         }
     }
 
+    console.log(runtime, year)
+
     return (
         <div className="container parameters">
             <h1 className="question">What did you like about {location.state.title}?</h1>
@@ -112,18 +114,22 @@ export default function Parameters() {
             <h2 className="parameterSection">Details</h2>
 
             <GenreInput genres={movieDetails.genres} onClick={changeGenre}/>
+  
+            <div>
+                <input type="checkbox" id="year" value="year" onClick={() => changeYear(Number(movieDetails.release_date.slice(0,4)))}/>
+                <label htmlFor="year">Year: {movieDetails.release_date.slice(0,4)}</label>    
+            </div>
 
-            <label htmlFor="year" onClick={() => changeYear(Number(movieDetails.release_date.slice(0,4)))}>
-                <input type="checkbox" id="year" value="year" onClick={() => changeYear(Number(movieDetails.release_date.slice(0,4)))}/>Year: {movieDetails.release_date.slice(0,4)}
-            </label>
+            <div>
+                <input type="checkbox" id="length" value={movieDetails.runtime} onClick={() => changeRuntime(movieDetails.runtime)}/>
+                <label htmlFor="length">Runtime: {movieDetails.runtime} minutes</label>    
+            </div>
 
-            <label htmlFor="length" onClick={() => changeRuntime(movieDetails.runtime)}>
-                <input type="checkbox" id="length" value={movieDetails.runtime}/>Runtime: {movieDetails.runtime} minutes
-            </label>
+            <div>
+                <input type="checkbox" id="language" value={movieDetails.original_language} onClick={() => changeLanguage(movieDetails.original_language)}/>
+                <label htmlFor="language">Original Language: {language[0].english_name}</label>                
+            </div>
 
-            <label htmlFor="language" onClick={() => changeLanguage(movieDetails.original_language)}>
-                <input type="checkbox" id="language" value={movieDetails.original_language}/>Original Language: {language[0].english_name}
-            </label>
 
             <h2 className="parameterSection">Directors/Writers</h2>
 
