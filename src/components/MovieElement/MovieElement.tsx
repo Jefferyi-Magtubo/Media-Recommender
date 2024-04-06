@@ -11,8 +11,8 @@ export default function MovieElement({id, title, rDate, poster, summary} : {id: 
                 null}
 
                 <div className='movieInfo'>
-                    <h1>{title} {rDate ? `(${rDate.slice(0,4)})` : null}</h1>
-                    <p>{summary ? summary : "Details about the plot could not be found."}</p>
+                    <h1 className="title">{title} {rDate ? `(${rDate.slice(0,4)})` : null}</h1>
+                    <p className="summary">{summary ? summary : "Details about the plot could not be found."}</p>
                     
                     {poster ? null : 
                         <>

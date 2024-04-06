@@ -46,3 +46,41 @@ a {
     text-decoration: unset;
     color: unset;
 }
+
+@media (min-width: 601px) {
+  .summary {
+    font-size: .75rem;
+  }
+
+  .moviePoster {
+    width: 133px;
+    height: 200px;
+
+  }
+  
+  .noPoster {
+    height: 200px;
+  }
+
+
+}
+
+@media (min-width: 1280px) {
+  .summary {
+    font-size: 1.25rem;
+  }
+
+  .moviePoster {
+    width: 133px;
+    height: 200px;
+
+  }
+  
+  .noPoster {
+    height: 200px;
+  }
+
+  .title {
+    font-size: 1.5rem
+  }
+}
